@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
+import expenseRoutes from './routes/expenseRoutes.js';
 import cors from 'cors';
 
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(
   })
 );
 app.use('/api/auth', authRoutes);
+app.use('/api/expenses', expenseRoutes);
 
 app.get('/', (req, res) => {
   res.send('API running...');

@@ -1,16 +1,22 @@
+# 💸 SpendSense - MERN Authentication + Expense Tracker App
 
-# MERN User Authentication App
+**SpendSense** is a full-stack **MERN Authentication + Personal Expense Tracker** application. It features secure login, signup, logout, protected dashboard routing, and a fully functional expense manager with a monthly summary chart. Built using modern React with Tailwind CSS on the frontend, and a robust Express + MongoDB backend with JWT-based authentication and cookie-based sessions.
 
-A complete full-stack **MERN Authentication System** featuring secure login, signup, logout, and protected dashboard routing. Built using modern React with Tailwind CSS, and a robust Express + MongoDB backend with JWT-based authentication.
 
 ## 🔥 Features
 
-- 🔐 **User Authentication**: Signup, Login, Logout
-- ✅ **Protected Routes**: Only accessible with a valid session token
-- 🍪 **JWT with HTTP-only Cookies**: Secure session management
-- 🔁 **Persistent Login**: Auto-login on page refresh
-- 🔄 **React Context API** for global auth state
-- 🧪 **UX Enhancements**: Toasts for feedback, responsive UI
+### 🔐 Authentication System
+- Signup, Login, Logout
+- Protected Routes using JWT in HTTP-only cookies
+- Persistent login on page refresh
+- React Context API for global auth state
+- Toast notifications for UX feedback
+
+### 💰 Expense Tracker
+- Add, edit, delete personal expenses
+- Categorize by title, category, date
+- Bar chart to visualize monthly spending trends (via MongoDB aggregation)
+- Filter and view total expenses by month
 
 ## 🛠 Tech Stack
 
@@ -19,6 +25,7 @@ A complete full-stack **MERN Authentication System** featuring secure login, sig
 - React Router DOM
 - Tailwind CSS
 - react-hot-toast
+- recharts (for charts)
 
 ### Backend
 - Node.js + Express
@@ -32,8 +39,8 @@ A complete full-stack **MERN Authentication System** featuring secure login, sig
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/mern-auth-app.git
-cd mern-auth-app
+git clone https://github.com/your-username/mern-auth-expense-tracker.git
+cd mern-auth-expense-tracker
 ```
 
 ### 2. Setup Backend
@@ -66,7 +73,7 @@ npm run dev
 ## 📁 Folder Structure
 
 ```
-mern-auth-app/
+mern-auth-expense-tracker/
 ├── backend/
 │   ├── controllers/
 │   ├── models/
@@ -81,19 +88,24 @@ mern-auth-app/
 │   └── main.jsx
 ```
 
-## ✅ Routes
+## ✅ API Routes
 
 ### Public
 - `POST /api/auth/signup`
 - `POST /api/auth/login`
 
-### Protected
+### Protected (Requires cookie-based token)
 - `GET /api/auth/me`
 - `POST /api/auth/logout`
+- `GET /api/expenses`
+- `POST /api/expenses`
+- `PUT /api/expenses/:id`
+- `DELETE /api/expenses/:id`
+- `GET /api/expenses/summary`
 
 ## 🙌 Acknowledgements
 
-This project was built to demonstrate modern MERN stack capabilities and help junior developers showcase full-stack authentication skills.
+This project was built to demonstrate full-stack MERN capabilities with secure authentication and data visualization using MongoDB and Recharts.
 
 ---
 
