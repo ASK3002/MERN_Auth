@@ -6,13 +6,13 @@
 ## 🖼 Screenshots
 
 ### 🔐 Auth Pages
-<img src="src/assets/ss1.png" alt="Auth Page Screenshot" width="100%" />
+<img src="./frontend/src/assets/ss1.png" alt="Auth Page Screenshot" width="100%" />
 
 ### 💰 Expense Dashboard
-<img src="src/assets/ss2.png" alt="Expense Dashboard Screenshot" width="100%" />
+<img src="./frontend/src/assets/ss2.png" alt="Expense Dashboard Screenshot" width="100%" />
 
 ### 📊 Monthly Expense Chart
-<img src="src/assets/ss3.png" alt="Chart Screenshot" width="100%" />
+<img src="./frontend/src/assets/ss3.png" alt="Chart Screenshot" width="100%" />
 
 ## 🔥 Features
 
