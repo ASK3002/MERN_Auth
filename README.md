@@ -3,6 +3,17 @@
 **SpendSense** is a full-stack **MERN Authentication + Personal Expense Tracker** application. It features secure login, signup, logout, protected dashboard routing, and a fully functional expense manager with a monthly summary chart. Built using modern React with Tailwind CSS on the frontend, and a robust Express + MongoDB backend with JWT-based authentication and cookie-based sessions.
 
 
+## 🖼 Screenshots
+
+### 🔐 Auth Pages
+<img src="src/assets/ss1.png" alt="Auth Page Screenshot" width="100%" />
+
+### 💰 Expense Dashboard
+<img src="src/assets/ss2.png" alt="Expense Dashboard Screenshot" width="100%" />
+
+### 📊 Monthly Expense Chart
+<img src="src/assets/ss3.png" alt="Chart Screenshot" width="100%" />
+
 ## 🔥 Features
 
 ### 🔐 Authentication System
