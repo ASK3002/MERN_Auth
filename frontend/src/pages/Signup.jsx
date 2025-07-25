@@ -19,7 +19,7 @@ export default function Signup() {
   };
 
   return (
-    <form onSubmit={handleSignup} className="max-w-sm mx-auto mt-12 p-6 bg-white shadow rounded">
+    <form onSubmit={handleSignup} className="max-w-sm mx-auto mt-12 p-6 bg-slate-600/25 shadow rounded">
       <h2 className="text-2xl font-bold mb-4 text-center">Signup</h2>
       <input
         type="text"
@@ -27,7 +27,7 @@ export default function Signup() {
         value={form.name}
         onChange={e => setForm({ ...form, name: e.target.value })}
         required
-        className="w-full mb-3 px-4 py-2 border rounded"
+        className="w-full mb-3 px-4 py-2 border rounded text-black"
       />
       <input
         type="email"
@@ -35,7 +35,7 @@ export default function Signup() {
         value={form.email}
         onChange={e => setForm({ ...form, email: e.target.value })}
         required
-        className="w-full mb-3 px-4 py-2 border rounded"
+        className="w-full mb-3 px-4 py-2 border rounded text-black"
       />
       <input
         type="password"
@@ -43,7 +43,7 @@ export default function Signup() {
         value={form.password}
         onChange={e => setForm({ ...form, password: e.target.value })}
         required
-        className="w-full mb-4 px-4 py-2 border rounded"
+        className="w-full mb-4 px-4 py-2 border rounded text-black"
       />
       <button
         type="submit"

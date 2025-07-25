@@ -8,7 +8,7 @@ import Layout from './components/Layout';
 
 function App() {
   return (
-    <Routes>
+    <Routes >
       {/* Public Routes */}
       <Route
         path="/login"

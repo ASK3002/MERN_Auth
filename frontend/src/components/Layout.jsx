@@ -4,7 +4,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-white">{children}</main>
+      <main className="min-h-screen bg-slate-800 ">{children}</main>
     </>
   );
 }

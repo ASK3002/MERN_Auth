@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #1e293b; /* This is Tailwind's slate-800 */
+  color: white;
+}
