@@ -18,7 +18,7 @@ Alongside a clean interface and session persistence via HTTP-only JWT cookies, S
 ### 📊 Monthly Expense Chart + Entry
 <img src="./frontend/src/assets/ss3.png" alt="Chart Screenshot" width="100%" />
 
-### 📊 Monthly Expense Suggestions 
+### 💡 Monthly Expense Suggestions 
 <img src="./frontend/src/assets/ss4.png" alt="Chart Screenshot" width="100%" />
 
 
