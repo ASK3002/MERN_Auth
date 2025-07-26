@@ -1,33 +1,56 @@
-# 💸 SpendSense - MERN Authentication + Expense Tracker App
 
-**SpendSense** is a full-stack **MERN Authentication + Personal Expense Tracker** application. It features secure login, signup, logout, protected dashboard routing, and a fully functional expense manager with a monthly summary chart. Built using modern React with Tailwind CSS on the frontend, and a robust Express + MongoDB backend with JWT-based authentication and cookie-based sessions.
+# 💸 SpendSense – Smart MERN Expense Tracker with Auth, Analytics & Suggestions
 
+**SpendSense** is a full-stack **MERN-based Personal Finance Tracker** built with modern technologies. It provides **secure authentication**, an intuitive **expense dashboard**, and intelligent **trend-based suggestions** by analyzing your current month's spending against the past 3 months using MongoDB aggregations.
+
+Alongside a clean interface and session persistence via HTTP-only JWT cookies, SpendSense also features **embedded financial widgets/ads** to provide relevant market insights.
+
+---
 
 ## 🖼 Screenshots
 
-### 🔐 Auth Pages
+### 🔐 Auth Pages  
 <img src="./frontend/src/assets/ss1.png" alt="Auth Page Screenshot" width="100%" />
 
-### 💰 Expense Dashboard
+### 💰 Expense Dashboard  
 <img src="./frontend/src/assets/ss2.png" alt="Expense Dashboard Screenshot" width="100%" />
 
-### 📊 Monthly Expense Chart
+### 📊 Monthly Expense Chart + Entry
 <img src="./frontend/src/assets/ss3.png" alt="Chart Screenshot" width="100%" />
+
+### 📊 Monthly Expense Suggestions 
+<img src="./frontend/src/assets/ss4.png" alt="Chart Screenshot" width="100%" />
+
+
+
+---
 
 ## 🔥 Features
 
 ### 🔐 Authentication System
 - Signup, Login, Logout
-- Protected Routes using JWT in HTTP-only cookies
-- Persistent login on page refresh
-- React Context API for global auth state
-- Toast notifications for UX feedback
+- JWT-based Auth with HTTP-only cookies
+- Protected Routes + Persistent Login on Refresh
+- Context API for global auth state
+- Toast notifications for real-time feedback
 
-### 💰 Expense Tracker
-- Add, edit, delete personal expenses
-- Categorize by title, category, date
-- Bar chart to visualize monthly spending trends (via MongoDB aggregation)
-- Filter and view total expenses by month
+### 💰 Expense Management
+- Add, edit, delete expenses
+- Categorize by title, type, and date
+- View monthly expense summaries
+- Real-time visualizations using `recharts`
+
+### 📈 Smart Trend Analysis (New)
+- Uses MongoDB Aggregation Pipelines
+- Compares current month spending with past 3 months
+- Highlights min/avg/max
+- Gives personalized suggestions
+
+### 🧠 Embedded Widgets
+- Sidebar includes space for market widgets or ads
+- Can be extended with live stock trackers or investment insights
+
+---
 
 ## 🛠 Tech Stack
 
@@ -35,23 +58,25 @@
 - React + Vite
 - React Router DOM
 - Tailwind CSS
-- react-hot-toast
-- recharts (for charts)
+- Recharts (Graphs)
+- React Hot Toast
 
 ### Backend
 - Node.js + Express
 - MongoDB + Mongoose
-- bcryptjs for password hashing
-- jsonwebtoken for session tokens
-- cookie-parser for secure cookies
-- dotenv for environment management
+- JWT + cookie-parser for secure sessions
+- bcryptjs for hashing
+- dotenv for config
+
+---
 
 ## 🚀 Getting Started
 
-### 1. Clone the Repository
+### 1. Clone Repo
+
 ```bash
-git clone https://github.com/your-username/mern-auth-expense-tracker.git
-cd mern-auth-expense-tracker
+git clone https://github.com/your-username/spendsense.git
+cd spendsense
 ```
 
 ### 2. Setup Backend
@@ -64,7 +89,7 @@ npm run dev
 
 Create a `.env` file in `/backend`:
 
-```
+```env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
@@ -78,45 +103,56 @@ npm install
 npm run dev
 ```
 
-> App runs at: `http://localhost:5173`  
-> Backend runs at: `http://localhost:5000`
+> 🔗 Frontend: `http://localhost:5173`  
+> 🔗 Backend: `http://localhost:5000`
+
+---
 
 ## 📁 Folder Structure
 
 ```
-mern-auth-expense-tracker/
+spendsense/
 ├── backend/
 │   ├── controllers/
 │   ├── models/
 │   ├── routes/
-│   ├── config/
+│   ├── utils/
 │   └── server.js
 ├── frontend/
 │   ├── components/
 │   ├── context/
+│   ├── hooks/
 │   ├── pages/
-│   ├── utils/
 │   └── main.jsx
 ```
 
+---
+
 ## ✅ API Routes
 
-### Public
+### Auth
 - `POST /api/auth/signup`
 - `POST /api/auth/login`
-
-### Protected (Requires cookie-based token)
 - `GET /api/auth/me`
 - `POST /api/auth/logout`
+
+### Expenses
 - `GET /api/expenses`
 - `POST /api/expenses`
 - `PUT /api/expenses/:id`
 - `DELETE /api/expenses/:id`
-- `GET /api/expenses/summary`
+- `GET /api/expenses/summary` _(aggregated trends)_
+
+---
 
 ## 🙌 Acknowledgements
 
-This project was built to demonstrate full-stack MERN capabilities with secure authentication and data visualization using MongoDB and Recharts.
+SpendSense is designed to demonstrate real-world MERN full-stack capabilities, including:
+- JWT auth
+- MongoDB aggregations
+- State management
+- Tailwind styling
+- Chart visualizations
 
 ---
 
