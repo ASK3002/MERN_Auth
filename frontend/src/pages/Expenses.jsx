@@ -89,7 +89,7 @@ export default function Expenses() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 mt-6 bg-slate-900 text-white shadow-2xl rounded-xl">
+    <div className="max-w-4xl mx-auto p-6 mt-6 bg-slate-800 text-white shadow-2xl rounded-xl">
       <h2 className="text-3xl font-bold mb-6">Track Expenses</h2>
 
       {/* Monthly Summary Chart */}
@@ -109,74 +109,96 @@ export default function Expenses() {
         <ResponsiveContainer width="100%" height={300}>
           {chartType === 'bar' ? (
             <BarChart data={summary}>
+              <defs>
+                {summary.map((_, index) => (
+                  <linearGradient id={`bar-grad-${index}`} x1="0" y1="0" x2="0" y2="1" key={index}>
+                    <stop offset="0%" stopColor={COLORS[index % COLORS.length]} stopOpacity={1} />
+                    <stop offset="100%" stopColor={COLORS[index % COLORS.length]} stopOpacity={0.6} />
+                  </linearGradient>
+                ))}
+              </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
               <XAxis dataKey="month" stroke="#cbd5e1" />
               <YAxis stroke="#cbd5e1" />
               <Tooltip />
-              <Bar dataKey="total" fill="#3b82f6" />
+              <Bar dataKey="total" radius={[10, 10, 0, 0]}>
+                {summary.map((_, index) => (
+                  <Cell key={index} fill={`url(#bar-grad-${index})`} />
+                ))}
+              </Bar>
             </BarChart>
           ) : (
             <PieChart>
+              <defs>
+                {summary.map((_, index) => (
+                  <linearGradient id={`grad-${index}`} x1="0" y1="0" x2="1" y2="1" key={index}>
+                    <stop offset="0%" stopColor={COLORS[index % COLORS.length]} stopOpacity={0.6} />
+                    <stop offset="100%" stopColor={COLORS[index % COLORS.length]} stopOpacity={1} />
+                  </linearGradient>
+                ))}
+              </defs>
               <Pie
                 data={summary}
                 dataKey="total"
                 nameKey="month"
                 cx="50%"
                 cy="50%"
+                innerRadius={50}
                 outerRadius={100}
                 label
+                stroke="#1e293b"
+                strokeWidth={2}
               >
                 {summary.map((_, index) => (
-                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                  <Cell key={index} fill={`url(#grad-${index})`} />
                 ))}
               </Pie>
               <Tooltip />
-              <Legend />
+              <Legend verticalAlign="bottom" height={36} />
             </PieChart>
           )}
         </ResponsiveContainer>
       </div>
 
       {/* Upload CSV Section */}
-<div className="mb-6">
-  <form
-    onSubmit={async (e) => {
-      e.preventDefault();
-      const fileInput = e.target.elements.file;
-      const formData = new FormData();
-      formData.append('file', fileInput.files[0]);
+      <div className="mb-6">
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            const fileInput = e.target.elements.file;
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
 
-      try {
-        await axios.post('/expenses/upload', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
-        toast.success('Expenses uploaded');
-        fetchExpenses();
-        fetchSummary();
-        e.target.reset();
-      } catch {
-        toast.error('Upload failed');
-      }
-    }}
-  >
-    <label className="block mb-2 text-white font-semibold">Upload CSV:</label>
-    <div className="flex gap-3">
-      <input
-        type="file"
-        name="file"
-        accept=".csv"
-        required
-        className="text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:bg-blue-600 file:text-white hover:file:bg-blue-700"
-      />
-      <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-        Upload
-      </button>
-    </div>
-  </form>
-</div>
+            try {
+              await axios.post('/expenses/upload', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+              });
+              toast.success('Expenses uploaded');
+              fetchExpenses();
+              fetchSummary();
+              e.target.reset();
+            } catch {
+              toast.error('Upload failed');
+            }
+          }}
+        >
+          <label className="block mb-2 text-white font-semibold">Upload CSV:</label>
+          <div className="flex gap-3">
+            <input
+              type="file"
+              name="file"
+              accept=".csv"
+              required
+              className="text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:bg-blue-600 file:text-white hover:file:bg-blue-700"
+            />
+            <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+              Upload
+            </button>
+          </div>
+        </form>
+      </div>
 
-
-      {/* Form */}
+      {/* Add Expense Form */}
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         {['Title', 'Amount', 'Category', 'Date'].map((field, i) => (
           <input

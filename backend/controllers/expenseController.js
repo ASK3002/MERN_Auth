@@ -79,7 +79,7 @@ export const getMonthlySummary = async (req, res) => {
 
   try {
     const debug = await Expense.find({ user: userId }).limit(5);
-    console.log("Expenses for summary debug:", debug);
+    // console.log("Expenses for summary debug:", debug);
 
     const summary = await Expense.aggregate([
       { $match: { user: new mongoose.Types.ObjectId(userId) } },
@@ -109,7 +109,7 @@ export const getMonthlySummary = async (req, res) => {
       { $sort: { monthNum: 1 } }
     ]);
 
-    console.log('Monthly summary:', summary);
+    // console.log('Monthly summary:', summary);
     res.json(summary);
   } catch (err) {
     console.error('Summary error:', err);

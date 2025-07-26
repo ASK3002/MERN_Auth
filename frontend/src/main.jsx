@@ -1,5 +1,8 @@
 import React from 'react';
 import './index.css';
+import "@fontsource/inter/index.css"; // ✅ works for most setups
+
+
 import { Toaster } from 'react-hot-toast';
 
 import ReactDOM from 'react-dom/client';
@@ -9,6 +12,8 @@ import { AuthProvider } from './context/AuthContext.jsx'; // ✅ THIS LINE
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
+
+  
     <AuthProvider>
       <App  />
       <Toaster position="top-right" />

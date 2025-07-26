@@ -2,13 +2,14 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
-import Expenses from './pages/Expenses'; // ✅ Make sure it's imported
+import Expenses from './pages/Expenses';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
+import DetailedAnalysis from './pages/DetailedAnalysis'; // ✅ Make sure it's imported
 
 function App() {
   return (
-    <Routes >
+    <Routes>
       {/* Public Routes */}
       <Route
         path="/login"
@@ -45,6 +46,18 @@ function App() {
           <ProtectedRoute>
             <Layout>
               <Expenses />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+
+      {/* 🔍 NEW Detailed Analysis Route */}
+      <Route
+        path="/detailed-analysis"
+        element={
+          <ProtectedRoute>
+            <Layout>
+              <DetailedAnalysis />
             </Layout>
           </ProtectedRoute>
         }
