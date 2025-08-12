@@ -187,7 +187,7 @@ export default function Expenses() {
             <input
               type="file"
               name="file"
-              accept=".csv"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
               required
               className="text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:bg-blue-600 file:text-white hover:file:bg-blue-700"
             />
