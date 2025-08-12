@@ -4,8 +4,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js",
-    "build": "cd ../frontend && npm install && npm run build && cp -r dist/* ../backend/public/"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
