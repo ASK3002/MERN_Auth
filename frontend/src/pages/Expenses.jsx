@@ -238,6 +238,46 @@ export default function Expenses() {
         </p>
       </div>
 
+      {/* Filter, Total, and Delete All */}
+<div className="flex justify-between items-center mb-6">
+  <div className="flex gap-4 items-center">
+    <select
+      value={selectedMonth}
+      onChange={(e) => setSelectedMonth(e.target.value)}
+      className="bg-slate-800 border border-slate-600 px-2 py-1 rounded text-white"
+    >
+      <option value="">All Months</option>
+      {Array.from({ length: 12 }, (_, i) => (
+        <option key={i} value={i}>
+          {new Date(0, i).toLocaleString('default', { month: 'long' })}
+        </option>
+      ))}
+    </select>
+    <p className="text-lg font-medium">
+      Total: ₹{filteredExpenses.reduce((sum, exp) => sum + Number(exp.amount), 0)}
+    </p>
+  </div>
+
+  <button
+    onClick={async () => {
+      if (!window.confirm("Are you sure you want to delete ALL expenses?")) return;
+      try {
+        await axios.delete("/expenses");
+        toast.success("All expenses deleted");
+        setExpenses([]);
+        setFilteredExpenses([]);
+        fetchSummary();
+      } catch {
+        toast.error("Failed to delete all expenses");
+      }
+    }}
+    className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
+  >
+    🗑 Delete All
+  </button>
+</div>
+
+      
       {/* Expense List */}
       <ul className="space-y-4">
         {filteredExpenses.map((exp) => (

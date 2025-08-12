@@ -73,6 +73,17 @@ export const deleteExpense = async (req, res) => {
   }
 };
 
+// ✅ NEW: Delete all expenses for logged-in user
+export const deleteAllExpenses = async (req, res) => {
+  try {
+    await Expense.deleteMany({ user: req.user._id });
+    res.json({ message: 'All expenses deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to delete all expenses' });
+  }
+};
+
+
 
 export const getMonthlySummary = async (req, res) => {
   const userId = req.user.id;
