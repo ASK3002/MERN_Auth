@@ -7,9 +7,12 @@ import expenseRoutes from './routes/expenseRoutes.js';
 import expenseSuggestionRoute from './routes/expenseSuggestionRoute.js'; // 👈 NEW
 import aiRoutes from './routes/aiRoutes.js';
 import cors from 'cors';
+import path  from "path";
 
 dotenv.config();
 connectDB();
+
+const _dirname=path.resolve();
 
 const app = express();
 app.use(express.json());
@@ -23,8 +26,18 @@ app.use(
 
 app.use('/api/auth', authRoutes);
 app.use('/api/expenses', expenseRoutes);
-app.use('/api/expenses', expenseSuggestionRoute); // 👈 NEW
+app.use('/api/expenses/suggestions', expenseSuggestionRoute);
+
 app.use('/api/ai', aiRoutes);
+
+// Serve static frontend
+app.use(express.static(path.join(_dirname, 'frontend/dist')));
+
+// Only for non-API routes
+app.get(/^(?!\/api).*/, (_, res) => {
+  res.sendFile(path.join(_dirname, 'frontend/dist/index.html'));
+});
+
 
 app.get('/', (req, res) => {
   res.send('API running...');
