@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://spendsense-7a5q.onrender.com/",
+    origin: "https://spendsense-7a5q.onrender.com",
     credentials: true,
   })
 );
