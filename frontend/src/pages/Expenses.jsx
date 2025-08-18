@@ -167,18 +167,18 @@ export default function Expenses() {
             e.preventDefault();
             const fileInput = e.target.elements.file;
             const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
+            formData.append("file", fileInput.files[0]);
 
             try {
-              await axios.post('/expenses/upload', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' },
+              await axios.post("/expenses/upload", formData, {
+                headers: { "Content-Type": "multipart/form-data" },
               });
-              toast.success('Expenses uploaded');
+              toast.success("Expenses uploaded");
               fetchExpenses();
               fetchSummary();
               e.target.reset();
             } catch {
-              toast.error('Upload failed');
+              toast.error("Upload failed");
             }
           }}
         >
@@ -191,12 +191,43 @@ export default function Expenses() {
               required
               className="text-white file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:bg-blue-600 file:text-white hover:file:bg-blue-700"
             />
-            <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+            <button
+              type="submit"
+              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            >
               Upload
             </button>
           </div>
         </form>
+
+        {/* Download Sample + Instructions */}
+        <div className="mt-4 flex items-center gap-3">
+          <a
+            href="https://drive.google.com/uc?export=download&id=1RpgLGxCQeEHP02lTI14ye9QiyGVc-0Sk" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded shadow transition"
+          >
+            ⬇ Download sample.xlsx
+          </a>
+          <span className="text-gray-400 text-sm">Test this file and see results</span>
+
+          {/* Info Icon with Tooltip */}
+          <div className="relative group cursor-pointer">
+            <span className="text-blue-400 font-bold">ℹ️</span>
+            <div className="absolute left-6 bottom-full mb-2 w-72 hidden group-hover:block bg-slate-800 text-gray-200 text-sm p-3 rounded shadow-lg border border-slate-700">
+              <p className="mb-1">👉 Steps to test:</p>
+              <ol className="list-decimal list-inside space-y-1">
+                <li>Click on <strong>Download sample.xlsx</strong></li>
+                <li>Find it in your device's <strong>Downloads</strong> folder</li>
+                <li>Click <strong>Choose File</strong> above and select it</li>
+                <li>Finally, click <strong>Upload</strong></li>
+              </ol>
+            </div>
+          </div>
+        </div>
       </div>
+
 
       {/* Add Expense Form */}
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
