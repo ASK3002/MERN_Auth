@@ -18,7 +18,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white shadow px-6 py-3 flex justify-between items-center">
-      <Link to="/" className="text-xl font-bold text-blue-600">Dashboard</Link>
+      <Link to="/" className="text-xl font-bold text-blue-600">SpendSense</Link>
       <div className="flex items-center gap-4">
         {user ? (
           <>
