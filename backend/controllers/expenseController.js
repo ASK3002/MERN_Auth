@@ -13,8 +13,9 @@ const getUserId = (req) => {
 // Create a new expense
 export const createExpense = async (req, res) => {
   try {
-    const userId = getUserId(req);
+    const userId = req.user._id; // ✅ use protect middleware
     const { title, amount, category, date } = req.body;
+
     const expense = await Expense.create({
       user: userId,
       title,
@@ -22,6 +23,7 @@ export const createExpense = async (req, res) => {
       category,
       date,
     });
+
     res.status(201).json(expense);
   } catch (err) {
     console.error(err);
@@ -32,7 +34,7 @@ export const createExpense = async (req, res) => {
 // Get all expenses for logged-in user
 export const getExpenses = async (req, res) => {
   try {
-    const userId = getUserId(req);
+    const userId = req.user._id; // ✅ consistent
     const expenses = await Expense.find({ user: userId }).sort({ date: -1 });
     res.status(200).json(expenses);
   } catch (err) {
@@ -41,16 +43,19 @@ export const getExpenses = async (req, res) => {
   }
 };
 
-// Update an expense
+
+// Update expense
 export const updateExpense = async (req, res) => {
   try {
-    const userId = getUserId(req);
+    const userId = req.user._id;  // ✅ use protect middleware
     const { id } = req.params;
+
     const updated = await Expense.findOneAndUpdate(
       { _id: id, user: userId },
       req.body,
       { new: true }
     );
+
     if (!updated) return res.status(404).json({ msg: 'Not found or unauthorized' });
     res.status(200).json(updated);
   } catch (err) {
@@ -59,19 +64,22 @@ export const updateExpense = async (req, res) => {
   }
 };
 
-// Delete an expense
+// Delete expense
 export const deleteExpense = async (req, res) => {
   try {
-    const userId = getUserId(req);
+    const userId = req.user._id; // ✅ use protect middleware
     const { id } = req.params;
+
     const deleted = await Expense.findOneAndDelete({ _id: id, user: userId });
     if (!deleted) return res.status(404).json({ msg: 'Not found or unauthorized' });
+
     res.status(200).json({ msg: 'Deleted' });
   } catch (err) {
     console.error(err);
     res.status(400).json({ msg: 'Failed to delete expense' });
   }
 };
+
 
 // ✅ NEW: Delete all expenses for logged-in user
 export const deleteAllExpenses = async (req, res) => {

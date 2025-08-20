@@ -55,7 +55,13 @@ export default function Expenses() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/expenses', form);
+      await axios.post('/expenses', {
+        title: form.title,
+        amount: Number(form.amount),
+        category: form.category,
+        date: form.date
+      }, { withCredentials: true });
+
       toast.success('Expense added');
       setForm({ title: '', amount: '', category: '', date: '' });
       fetchExpenses();
@@ -231,24 +237,59 @@ export default function Expenses() {
 
       {/* Add Expense Form */}
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        {['Title', 'Amount', 'Category', 'Date'].map((field, i) => (
-          <input
-            key={field}
-            type={field === 'Amount' ? 'number' : field === 'Date' ? 'date' : 'text'}
-            placeholder={field}
-            value={form[field.toLowerCase()]}
-            onChange={(e) => setForm({ ...form, [field.toLowerCase()]: e.target.value })}
-            required
-            className="bg-slate-800 text-white border border-slate-700 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        ))}
-        <button
-          type="submit"
-          className="col-span-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-        >
-          ➕ Add Expense
-        </button>
-      </form>
+  {/* Title */}
+  <input
+    type="text"
+    placeholder="Title"
+    value={form.title}
+    onChange={(e) => setForm({ ...form, title: e.target.value })}
+    required
+    className="bg-slate-800 text-white border border-slate-700 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+
+  {/* Amount */}
+  <input
+    type="number"
+    placeholder="Amount"
+    value={form.amount}
+    onChange={(e) => setForm({ ...form, amount: e.target.value })}
+    required
+    className="bg-slate-800 text-white border border-slate-700 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+
+  {/* Category (Dropdown) */}
+  <select
+    value={form.category}
+    onChange={(e) => setForm({ ...form, category: e.target.value })}
+    required
+    className="bg-slate-800 text-white border border-slate-700 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+  >
+    <option value="">Select Category</option>
+    {['Food', 'Transport', 'Health', 'Bills', 'Shopping', 'Other'].map((cat) => (
+      <option key={cat} value={cat}>
+        {cat}
+      </option>
+    ))}
+  </select>
+
+  {/* Date */}
+  <input
+    type="date"
+    value={form.date}
+    onChange={(e) => setForm({ ...form, date: e.target.value })}
+    required
+    className="bg-slate-800 text-white border border-slate-700 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+
+  {/* Submit */}
+  <button
+    type="submit"
+    className="col-span-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+  >
+    ➕ Add Expense
+  </button>
+</form>
+
 
       {/* Filter and Total */}
       <div className="flex justify-between items-center mb-6">
